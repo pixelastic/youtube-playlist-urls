@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+mkdir -p ./tmp
+babel src/main.js --out-file tmp/main.js
+
+echo "#!/usr/bin/env node" > ./youtube-playlist-urls
+cat ./tmp/main.js >> ./youtube-playlist-urls
+chmod +x ./youtube-playlist-urls
