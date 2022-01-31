@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+var _this = this;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -9,31 +9,35 @@ var _ytpl = require('ytpl');
 
 var _ytpl2 = _interopRequireDefault(_ytpl);
 
-(function () {
-  function getQueryStringParam(url, name) {
-    var queryString = url.split('?')[1].split('&');
-    var match = null;
-    queryString.forEach(function (parameter) {
-      var _parameter$split = parameter.split('=');
+var _golgoth = require('golgoth');
 
-      var _parameter$split2 = _slicedToArray(_parameter$split, 2);
+(function callee$0$0() {
+  var playlist;
+  return regeneratorRuntime.async(function callee$0$0$(context$1$0) {
+    while (1) switch (context$1$0.prev = context$1$0.next) {
+      case 0:
+        context$1$0.next = 2;
+        return regeneratorRuntime.awrap((0, _ytpl2['default'])(process.argv[2], { limit: Infinity }));
 
-      var key = _parameter$split2[0];
-      var value = _parameter$split2[1];
+      case 2:
+        playlist = context$1$0.sent;
 
-      if (key === name) {
-        match = value;
-      }
-    });
-    return match;
-  }
+        _golgoth._.each(playlist.items, function (item) {
+          console.info(item.shortUrl);
+        });
 
-  var playlistId = getQueryStringParam(process.argv[2], 'list');
-
-  (0, _ytpl2['default'])(playlistId, function (_err, playlist) {
-    playlist.items.forEach(function (item) {
-      var videoId = getQueryStringParam(item.url, 'v');
-      console.info('https://www.youtube.com/watch?v=' + videoId);
-    });
-  });
+      case 4:
+      case 'end':
+        return context$1$0.stop();
+    }
+  }, null, _this);
 })();
+
+// function getQueryStringParam(url, name) {
+//   const queryString = url.split('?')[1];
+//   const urlSearchParams = new URLSearchParams(queryString);
+//   const params = Object.fromEntries(urlSearchParams.entries());
+//   return params[name];
+// }
+
+// const playlistId = getQueryStringParam(process.argv[2], 'list');
