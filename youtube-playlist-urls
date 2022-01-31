@@ -1,43 +1,4 @@
-#!/usr/bin/env node
-'use strict';
-
-var _this = this;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _ytpl = require('ytpl');
-
-var _ytpl2 = _interopRequireDefault(_ytpl);
-
-var _golgoth = require('golgoth');
-
-(function callee$0$0() {
-  var playlist;
-  return regeneratorRuntime.async(function callee$0$0$(context$1$0) {
-    while (1) switch (context$1$0.prev = context$1$0.next) {
-      case 0:
-        context$1$0.next = 2;
-        return regeneratorRuntime.awrap((0, _ytpl2['default'])(process.argv[2], { limit: Infinity }));
-
-      case 2:
-        playlist = context$1$0.sent;
-
-        _golgoth._.each(playlist.items, function (item) {
-          console.info(item.shortUrl);
-        });
-
-      case 4:
-      case 'end':
-        return context$1$0.stop();
-    }
-  }, null, _this);
-})();
-
-// function getQueryStringParam(url, name) {
-//   const queryString = url.split('?')[1];
-//   const urlSearchParams = new URLSearchParams(queryString);
-//   const params = Object.fromEntries(urlSearchParams.entries());
-//   return params[name];
-// }
-
-// const playlistId = getQueryStringParam(process.argv[2], 'list');
+#!/usr/bin/env bash
+set -e
+cd "$(dirname -- "$(readlink -f -- "$BASH_SOURCE")")"
+node ./main.js "$1"
